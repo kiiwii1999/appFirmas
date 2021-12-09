@@ -9,7 +9,10 @@
 
 <p>El programa cuenta con 3 clases: Main, Keys y Signer</p>
 
+
 <p>La clase Main se encarga de iniciar la ejecución del programa llamando a los respectivos metodos de generacion de claves privadas y publicas</p>
+
+
 
 <p>La clase Keys contiene los metodos para generar, exportar e importar las llaves publica y privada a 2 archivos de texto diferentes</p>
 
@@ -18,5 +21,25 @@
 			KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("DSA");
 			KeyPair keyPair = keyPairGenerator.generateKeyPair();
 
+
+
 <p>La clase Signer se encarga de asignar la la firma digital generada a un archivo especificado. Tambien permite emplear un metodo para verificar si el archivo previamente firmado corresponde a otro enviado por parametro</p>
 
+##### Ejemplo de firma de archivo
+
+			//creacion de la instancia de la firma
+			Signature signature = Signature.getInstance("SHA256WithDSA");
+			signature.initSign(privateKey, secureRandom);
+			
+			
+			//se elabora la firma basada en los datos del archivo original
+			signature.update(getBytesFromFile(filePath));
+			digitalSignature = signature.sign();
+			
+##### Ejemplo de verificacín de firma de archivo
+
+			byte[] signature = getBytesFromFile(signaturePath); 
+			
+			Signature signature2 = Signature.getInstance("SHA256WithDSA");
+			signature2.initVerify(publicKey);
+			signature2.update(getBytesFromFile(filePath));
