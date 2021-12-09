@@ -16,8 +16,16 @@ import java.security.SignatureException;
 
 public class Signer {
 	
+	
+	/***
+	 * constante para la ruta donde sera guardado el archivo con la firma.
+	 */
 	public static final String SIGNATURE_PATH = "./keys/signature.txt";
 	
+	
+	/***
+	 * bytes de la firma.
+	 */
 	private byte[] digitalSignature;
 	
 	
@@ -26,9 +34,9 @@ public class Signer {
 	
 	
 	/***
-	 * 
-	 * @param privateKey
-	 * @param filePath
+	 * Este metodo se encarga de tomar una clave  privada y firma crea una firma para un archivo que es pasado por parametro.
+	 * @param privateKey - Llave privada con la que sera firmado el archivo.
+	 * @param filePath - Ruta del archivo al que se le desea generar una firma.
 	 * @param secureRandom
 	 */
 	public void sifnFile (PrivateKey privateKey, String filePath, SecureRandom secureRandom) {
@@ -73,11 +81,12 @@ public class Signer {
 	
 	
 	/***
-	 * 
-	 * @param publicKey
-	 * @param signaturePath
-	 * @param filePath
-	 * @return
+	 * Este metodo se encarga de verificar si una forma coincide con su documento asociado.
+	 * @param publicKey - Llave publica para llevar a cavo la verificacion.
+	 * @param signaturePath - Ruta del archivo que contine la firma del documento original.
+	 * @param filePath - Ruta del documento original al que se le desea verificar la firma.
+	 * @return - true: si el la firma y el archivo firmado coinciden. 
+	 * 		   - false: si el la firma y el archivo firmado NO coinciden. 
 	 */
 	public boolean verifySignature(PublicKey publicKey, String signaturePath, String filePath) {
 	
@@ -104,7 +113,12 @@ public class Signer {
 		return false;
 	}
 	
-	
+	/***
+	 * Este metodo se encarga de obtener los bytes de un archivo determinado a partir de su ruta.
+	 * @param path 
+	 * @return - dataBytes: los bytes del archivo objetivo
+	 * 		   - null: si no encuentra tal archivo.
+	 */
 	public byte[] getBytesFromFile(String path) {
 		try {
 			File dataFile = new File(path);
@@ -119,6 +133,7 @@ public class Signer {
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("el archivo de la firma no ha sido encontrado por favor verifique su ubicacion");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
