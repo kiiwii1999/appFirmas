@@ -18,41 +18,80 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
 public class Keys {
-	
+	/**
+	 * Constantes con las rutas hacia los archivos de las llaves privada y publica
+	 */
 	public static final String PRIVATE_KEY_PATH = "./keys/privateKey.txt";
 	public static final String PUBLIC_KEY_PATH = "./keys/publicKey.txt";
 	
+	/**
+	 * Atributos que representa la llave privada
+	 */
 	private PrivateKey privateKey;
+	/**
+	 * Atributos que representa la llave publica
+	 */
 	private PublicKey publicKey;
+	/**
+	 * Objeto que provee un numero aleatorio criptograficamente fuerte
+	 */
 	private SecureRandom secureRandom;
 	
 	public Keys() {
 	}
 	
+	/**
+	 * Metodo que retorna la llave privada
+	 * @return privateKey - lave privada
+	 */
 	public PrivateKey getPrivateKey() {
 		return privateKey;
 	}
 
+	/**
+	 * Metodo que asigna la llave privada con base en un parametro 
+	 * @param privateKey - la llave privada recibida que se debe asignar
+	 */
 	public void setPrivateKey(PrivateKey privateKey) {
 		this.privateKey = privateKey;
 	}
 
+	/**
+	 * Metodo que retorna la llave publica
+	 * @return publicKey - la llave publica
+	 */
 	public PublicKey getPublicKey() {
 		return publicKey;
 	}
 
+	/**
+	 * Metodo que asigna la llave publica con base en un parametro recibido
+	 * @param publicKey - la llave publica que se debe asignar
+	 */
 	public void setPublicKey(PublicKey publicKey) {
 		this.publicKey = publicKey;
 	}
 
+	/**
+	 * Metodo que retorna el numero aleatorio
+	 * @return secureRandom - EL numero aleatorio
+	 */
 	public SecureRandom getSecureRandom() {
 		return secureRandom;
 	}
+	
+	/**
+	 * Metodo que asigna el numero aleatorio con base en un parametro recibido
+	 * @param secureRandom - el numero aleatorio recibido
+	 */
 
 	public void setSecureRandom(SecureRandom secureRandom) {
 		this.secureRandom = secureRandom;
 	}
 
+	/**
+	 * Metodo que se encarga de generar el par de llaves publica y privada
+	 */
 	public void keyPairGenerator() {
 		try {
 			
@@ -70,6 +109,9 @@ public class Keys {
 		}
 	}
 	
+	/**
+	 * Metodo que exporta la llave privada a un archivo de texto
+	 */
 	public void exportPrivatekey() {
 		
 		try {
@@ -88,6 +130,9 @@ public class Keys {
 	}
 	
 
+	/**
+	 * metodo que exporta la llave publica a un archivo de texto
+	 */
 	public void exportPublickey() {
 		
 		try {
@@ -105,6 +150,11 @@ public class Keys {
 	
 	}
 	
+	/**
+	 * Metodo que importa la llave privada desde un archivo de texto
+	 * @param path - La ruta al archivo con la llave privada
+	 * @return 
+	 */
 	
 	public PrivateKey importPrivateKey(String path) {
 		try {
@@ -138,6 +188,11 @@ public class Keys {
 		
 	}
 	
+	/**
+	 * Metodo que se encarga de importar la llave publica desde un archivo de texto
+	 * @param path - la ruta al archivo con llave publica
+	 * @return
+	 */
 	
 	public PublicKey importPublicKey(String path) {
 		try {
