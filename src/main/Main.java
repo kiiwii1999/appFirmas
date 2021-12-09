@@ -19,6 +19,8 @@ import java.security.SignatureException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 
+import model.Keys;
+
 public class Main {
 	
 	
@@ -27,41 +29,42 @@ public class Main {
 	public static void keygenerator() { 
 	
 		try {
-			SecureRandom securerRandom = new SecureRandom();
-			KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("DSA");
-			KeyPair keyPair = keyPairGenerator.generateKeyPair();
+//			SecureRandom securerRandom = new SecureRandom();
+//			KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("DSA");
+//			KeyPair keyPair = keyPairGenerator.generateKeyPair();
+	
+			Keys keys = new Keys();
+			keys.keyPairGenerator();
+			keys.exportPrivatekey();
+			keys.exportPublickey();
 			System.out.println("--------------- LLAVE FORMATO--------------------------");
-			System.out.println(keyPair.getPrivate().getFormat());
+			System.out.println(keys.getPrivateKey().getEncoded());
 			System.out.println("--------------- LLAVE PRIVADA--------------------------");
-			System.out.println(new String(keyPair.getPrivate().getEncoded()));
+			System.out.println(new String(keys.getPrivateKey().getEncoded()));
 			System.out.println("--------------- LLAVE PUBLICA--------------------------");
-			System.out.println(new String(keyPair.getPublic().getEncoded()));
+			System.out.println(new String(keys.getPublicKey().getEncoded()));
+	
 			
-			String clavePrivada = new String(keyPair.getPrivate().getEncoded());
-			
-			System.out.println("--------------- LLAVE PRIVADA--------------------------");
-			System.out.println(clavePrivada);
-			
-			File privatekey = new File("./keys/privateKey.txt");
+//			File privatekey = new File("./keys/privateKey.txt");
 			
 			
-			FileOutputStream outF = new FileOutputStream(privatekey);
-			outF.write(keyPair.getPrivate().getEncoded());
+//			FileOutputStream outF = new FileOutputStream(privatekey);
+//			outF.write(keyPair.getPrivate().getEncoded());
 			
-			File f = new File("./keys/privateKey.txt");
-	        FileInputStream fis = new FileInputStream(f);
-	        DataInputStream dis = new DataInputStream(fis);
-	        byte[] keyBytes = new byte[(int) f.length()];
-	        dis.readFully(keyBytes);
-	        dis.close();
+//			File f = new File("./keys/privateKey.txt");
+//	        FileInputStream fis = new FileInputStream(f);
+//	        DataInputStream dis = new DataInputStream(fis);
+//	        byte[] keyBytes = new byte[(int) f.length()];
+//	        dis.readFully(keyBytes);
+//	        dis.close();
 	        
 	        
-	        KeyFactory fact2 = KeyFactory.getInstance("DSA");
-	        PrivateKey pKey = fact2.generatePrivate( new PKCS8EncodedKeySpec(keyBytes) );
+//	        KeyFactory fact2 = KeyFactory.getInstance("DSA");
+//	        PrivateKey pKey = fact2.generatePrivate( new PKCS8EncodedKeySpec(keyBytes) );
 			
 			Signature signature = Signature.getInstance("SHA256WithDSA");
 
-			signature.initSign(pKey, securerRandom);
+			signature.initSign(keys.importPrivateKey(Keys.PRIVATE_KEY_PATH), keys.getSecureRandom());
 			
 			byte[] data = "abcdefghijklmnopqrstuvxyz".getBytes("UTF-8");
 			signature.update(data);
@@ -70,7 +73,7 @@ public class Main {
 
 
 			Signature signature2 = Signature.getInstance("SHA256WithDSA");
-			signature2.initVerify(keyPair.getPublic());// aqui se agrega el archivo (proceso) de la llave publica para la opcion 3
+			signature2.initVerify(keys.importPublicKey(Keys.PUBLIC_KEY_PATH));// aqui se agrega el archivo (proceso) de la llave publica para la opcion 3
 
 			signature2.update(data);// aqui se agrega el archivo original en la opcion 3
 
@@ -92,9 +95,6 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvalidKeySpecException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (GeneralSecurityException e) {
