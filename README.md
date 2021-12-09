@@ -13,5 +13,10 @@
 
 <p>La clase Keys contiene los metodos para generar, exportar e importar las llaves publica y privada a 2 archivos de texto diferentes</p>
 
-<pZLa clase Signer se encarga de asignar la la firma digital generada a un archivo especificado. Tambien permite emplear un metodo para verificar si el archivo previamente firmado corresponde a otro enviado por parametro</p>
+##### Ejemplo de generador de par de llaves
+
+			>KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("DSA");
+			KeyPair keyPair = keyPairGenerator.generateKeyPair();
+
+<p>La clase Signer se encarga de asignar la la firma digital generada a un archivo especificado. Tambien permite emplear un metodo para verificar si el archivo previamente firmado corresponde a otro enviado por parametro</p>
 
