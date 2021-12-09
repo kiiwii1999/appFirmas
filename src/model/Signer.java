@@ -121,14 +121,21 @@ public class Signer {
 	 */
 	public byte[] getBytesFromFile(String path) {
 		try {
+			
+			// crea el acceso a la ruta del archivo
 			File dataFile = new File(path);
 			FileInputStream fis;
 			fis = new FileInputStream(dataFile);
 			DataInputStream dis = new DataInputStream(fis);
+			
+			//crea la variable que contendra los bytes del archivo
 			byte[] dataBytes = new byte[(int) dataFile.length()];
+			
+			//extrae los bytes y se serran los flujos.
 			dis.readFully(dataBytes);
 			dis.close();
 			fis.close();	
+			
 			return dataBytes;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
