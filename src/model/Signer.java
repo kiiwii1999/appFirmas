@@ -45,6 +45,9 @@ public class Signer {
 			
 			//creacion de la instancia de la firma
 			Signature signature = Signature.getInstance("SHA256WithDSA");
+			if (secureRandom == null) {
+				secureRandom = new SecureRandom();
+			}
 			signature.initSign(privateKey, secureRandom);
 			
 			
