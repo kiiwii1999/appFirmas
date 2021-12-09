@@ -7,7 +7,11 @@
 
 ### Estructura
 
-<p>EL programa cuenta con 3 clases: Main, Keys, Sgnature</p>
+<p>El programa cuenta con 3 clases: Main, Keys y Signer</p>
 
-<p>La clase main se encarga de iniciar la ejecución del programa llamando a los respectivos metodos de generacion de claves privadas y publicas</p>
+<p>La clase Main se encarga de iniciar la ejecución del programa llamando a los respectivos metodos de generacion de claves privadas y publicas</p>
+
+<p>La clase Keys contiene los metodos para generar, exportar e importar las llaves publica y privada a 2 archivos de texto diferentes</p>
+
+<pZLa clase Signer se encarga de asignar la la firma digital generada a un archivo especificado. Tambien permite emplear un metodo para verificar si el archivo previamente firmado corresponde a otro enviado por parametro</p>
 
