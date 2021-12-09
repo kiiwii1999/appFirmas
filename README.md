@@ -15,7 +15,7 @@
 
 ##### Ejemplo de generador de par de llaves
 
-			>KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("DSA");
+			KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("DSA");
 			KeyPair keyPair = keyPairGenerator.generateKeyPair();
 
 <p>La clase Signer se encarga de asignar la la firma digital generada a un archivo especificado. Tambien permite emplear un metodo para verificar si el archivo previamente firmado corresponde a otro enviado por parametro</p>
