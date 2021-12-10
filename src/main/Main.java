@@ -20,39 +20,13 @@ public class Main {
 	public static void keygenerator() { 
 	
 		try {
-//			SecureRandom securerRandom = new SecureRandom();
-//			KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("DSA");
-//			KeyPair keyPair = keyPairGenerator.generateKeyPair();
-	
+
 			Keys keys = new Keys();
 			keys.keyPairGenerator();
 			keys.exportPrivatekey();
 			keys.exportPublickey();
-			System.out.println("--------------- LLAVE FORMATO--------------------------");
-			System.out.println(keys.getPrivateKey().getEncoded());
-			System.out.println("--------------- LLAVE PRIVADA--------------------------");
-			System.out.println(new String(keys.getPrivateKey().getEncoded()));
-			System.out.println("--------------- LLAVE PUBLICA--------------------------");
-			System.out.println(new String(keys.getPublicKey().getEncoded()));
-	
 			
-//			File privatekey = new File("./keys/privateKey.txt");
-			
-			
-//			FileOutputStream outF = new FileOutputStream(privatekey);
-//			outF.write(keyPair.getPrivate().getEncoded());
-			
-//			File f = new File("./keys/privateKey.txt");
-//	        FileInputStream fis = new FileInputStream(f);
-//	        DataInputStream dis = new DataInputStream(fis);
-//	        byte[] keyBytes = new byte[(int) f.length()];
-//	        dis.readFully(keyBytes);
-//	        dis.close();
-	        
-	        
-//	        KeyFactory fact2 = KeyFactory.getInstance("DSA");
-//	        PrivateKey pKey = fact2.generatePrivate( new PKCS8EncodedKeySpec(keyBytes) );
-			
+		
 			Signature signature = Signature.getInstance("SHA256WithDSA");
 
 			signature.initSign(keys.importPrivateKey(Keys.PRIVATE_KEY_PATH), keys.getSecureRandom());

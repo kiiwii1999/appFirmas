@@ -76,6 +76,7 @@ public class Keys {
 			File privateFile = new File(PRIVATE_KEY_PATH);
 			FileOutputStream fos = new FileOutputStream(privateFile);
 			fos.write(privateKey.getEncoded());
+			fos.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -93,6 +94,7 @@ public class Keys {
 			File publicFile = new File(PUBLIC_KEY_PATH);
 			FileOutputStream fos = new FileOutputStream(publicFile);
 			fos.write(publicKey.getEncoded());
+			fos.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -112,6 +114,7 @@ public class Keys {
 			byte[] keyBytes = new byte[(int) privateFile.length()];
 			dis.readFully(keyBytes);
 			dis.close();
+			fis.close();
 			
 			KeyFactory fac = KeyFactory.getInstance("DSA");
 			
@@ -144,7 +147,7 @@ public class Keys {
 			byte[] keyBytes = new byte[(int) publicFile.length()];
 			dis.readFully(keyBytes);
 			dis.close();
-			
+			fis.close();
 			KeyFactory fac = KeyFactory.getInstance("DSA");
 			
 			return fac.generatePublic(new X509EncodedKeySpec(keyBytes));
